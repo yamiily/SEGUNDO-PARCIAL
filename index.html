@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BLOG PERSONAL </title>
+  <style>
+    /* Estilos CSS */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #070707;
+      color: #fa5e5e;
+      padding: 15px 0;
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+    .article {
+      border-bottom: 1px solid #999999;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+    h2 {
+      margin-top: 0;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MI BLOG PERSONAL !</h1>
+  </header>
+  <div class="container">
+    <h2>MIS ARTICULOS</h2>
+    <div id="articles"></div>
+    <button onclick="showForm()">Agregar artículo</button>
+  </div>
+
+   <!-- Formulario para agregar artículo -->
+   <div id="articleForm" style="display: none;" class="container">
+    <h2>INGRESAR ARTICULO</h2>
+    <form onsubmit="addArticle(event)">
+      <div>
+        <label for="title">Título:</label>
+        <input type="text" id="title" required>
+      </div>
+      <div>
+        <label for="imageURL">INGRESA EL URL DE LA IMAGEN:</label>
+        <input type="url" id="imageURL" required>
+      </div>
+      <div>
+        <label for="description">DESCRIPCION :</label>
+        <textarea id="description" required></textarea>
+      </div>
+      <div>
+        <label for="author">NOMBRE DEL AUTOR:</label>
+        <input type="text" id="author" required>
+      </div>
+      <div>
+        <label for="date">FECHA DE LA PUBLICACION:</label>
+        <input type="date" id="date" required>
+      </div>
+      <button type="submit">PUBLICAR</button>
+    </form>
+  </div>
+
+  <script>
+    // Función para mostrar el formulario de agregar artículo
+    function showForm() {
+      document.getElementById("articleForm").style.display = "block";
+    }
+
+    // Función para agregar un artículo
+    function addArticle(event) {
+      event.preventDefault();
+      const title = document.getElementById("title").value;
+      const imageURL = document.getElementById("imageURL").value;
+      const description = document.getElementById("description").value;
+      const author = document.getElementById("author").value;
+      const date = document.getElementById("date").value;
+
+      const articleHTML = `
+        <div class="article">
+          <h2>${title}</h2>
+          <img src="${imageURL}" alt="${title}">
+          <p>${description}</p>
+          <p>Autor: ${author}</p>
+          <p>Fecha de publicación: ${date}</p>
+        </div>
+      `;
+
+      document.getElementById("articles").innerHTML += articleHTML;
+      document.getElementById("articleForm").reset(); // Limpiar el formulario
+      document.getElementById("articleForm").style.display = "none"; // Ocultar el formulario
+    }
+  </script>
+</body>
+</html>
